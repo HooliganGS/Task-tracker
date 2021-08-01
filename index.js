@@ -21,7 +21,7 @@ let completedToDoCount = 0;
 function setTaskTime() {
     let time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     let date = new Date().toLocaleDateString();
-    return time + ' ' + date;
+    return `${time} ${date}`;
 }
 
 function selectPriority() {
