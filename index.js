@@ -239,7 +239,7 @@ function deleteTaskData() {
 
 function sortFromNew() {
     taskList.sort(function(a, b) {
-        return new Date(a.date) - new Date(b.date);
+        return a.date - b.date;
     });
     currentTasks.innerHTML = "";
     taskList.forEach(function(el) {
@@ -250,12 +250,13 @@ function sortFromNew() {
 
 function sortFromOld() {
     taskList.sort(function(a, b) {
-        return new Date(b.date) - new Date(a.date);
+        return b.date - a.date;
     });
     currentTasks.innerHTML = "";
     taskList.forEach(function(el) {
         return createTaskField(el, currentTasks);
     })
+
     saveData();
 }
 
