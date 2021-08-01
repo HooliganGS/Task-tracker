@@ -291,7 +291,8 @@ function saveData() {
 
 
 window.onload = function loadTasks() {
-    if (localStorage.getItem('toDo') !== null) {
+    let task = localStorage.getItem('toDo');
+    if (task !== null) {
         toDo = JSON.parse(localStorage.getItem('toDo'));
         currentTasks.innerHTML = "";
         toDoCount = toDo.length;
@@ -300,7 +301,8 @@ window.onload = function loadTasks() {
             createTaskField(el, currentTasks);
         })
     }
-    if (localStorage.getItem('completedToDo') !== null) {
+    let taskComplited = localStorage.getItem('completedToDo');
+    if (taskComplited !== null) {
         completed = JSON.parse(localStorage.getItem('completedToDo'));
         completeField.innerHTML = "";
         completedToDoCount = completed.length;
