@@ -32,6 +32,7 @@ function selectPriority() {
     }
 }
 
+
 function createTaskField(el, area) {
     let li = document.createElement('li');
     li.classList.add("list-group-item", "d-flex", "w-100", "mb-2");
