@@ -296,7 +296,7 @@ window.onload = function loadTasks() {
         toDo = JSON.parse(localStorage.getItem('toDo'));
         currentTasks.innerHTML = "";
         toDoCount = toDo.length;
-        document.getElementById('toDo-count').innerText = ' (' + toDoCount + ')';
+        document.getElementById('toDo-count').innerText = ' (' + `${toDoCount}` + ')';
         toDo.forEach(function(el) {
             createTaskField(el, currentTasks);
         })
@@ -306,7 +306,7 @@ window.onload = function loadTasks() {
         completed = JSON.parse(localStorage.getItem('completedToDo'));
         completeField.innerHTML = "";
         completedToDoCount = completed.length;
-        document.getElementById('completed-count').innerText = ' (' + completedToDoCount + ')';
+        document.getElementById('completed-count').innerText = ' (' + `${completedToDoCount}` + ')';
         completed.forEach(function(el) {
             createTaskField(el, completeField);
         })
