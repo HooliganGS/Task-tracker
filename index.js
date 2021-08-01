@@ -206,10 +206,11 @@ function saveEditChanges() {
     task.priority = selectPriority() + ' priority';
     task.time = setTaskTime();
     toDo.splice(index, 1, task);
-    let newTitle = currentTasks.children[index].getElementsByTagName("h5")[0];
-    let newText = currentTasks.children[index].getElementsByTagName("p")[0];
-    let newPriority = currentTasks.children[index].getElementsByTagName("small")[0];
-    let newTime = currentTasks.children[index].getElementsByTagName("small")[1];
+    let newElement = currentTasks.children[index];
+    let newTitle = newElement.getElementsByTagName("h5")[0];
+    let newText = newElement.getElementsByTagName("p")[0];
+    let newPriority = newElement.getElementsByTagName("small")[0];
+    let newTime = newElement.getElementsByTagName("small")[1];
     newTitle.innerHTML = task.title;
     newText.innerHTML = task.text;
     newPriority.innerHTML = selectPriority() + ' priority';
