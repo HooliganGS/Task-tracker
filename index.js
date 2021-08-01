@@ -178,9 +178,7 @@ function editTaskData() {
     title.value = toDoIndex.title;
     text.value = toDoIndex.text;
     switch (toDoIndex.priority) {
-        case 'Low priority':
-            document.getElementById('Low').checked = "true";
-            break;
+
         case 'Medium priority':
             document.getElementById('Medium').checked = "true";
             break;
