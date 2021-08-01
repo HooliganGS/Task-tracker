@@ -262,13 +262,13 @@ function sortFromOld() {
 function changeTheme() {
     if (switcher.checked) {
         document.querySelector('.navbar').classList.remove('bg-light');
-        document.querySelector('.modal-content').style.backgroundColor = '#0e1621';
+        document.querySelector('.modal-content').classList.add('white_theme');
         document.body.style.backgroundColor = '#0e1621';
         document.body.style.color = 'white';
         switcher.nextElementSibling.textContent = 'Dark Mode';
     } else {
         document.querySelector('.navbar').classList.add('bg-light');
-        document.querySelector('.modal-content').style.backgroundColor = 'white';
+        document.querySelector('.modal-content').classList.add('black_theme');
         document.body.style.backgroundColor = 'white';
         document.body.style.color = 'black';
         switcher.nextElementSibling.textContent = 'White Mode';

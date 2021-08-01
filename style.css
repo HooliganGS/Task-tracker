@@ -10,3 +10,11 @@
 .show {
     display: inline;
 }
+
+.white_theme {
+    background-color: #0e1621;
+}
+
+.black_theme {
+    background-color: #fff;
+}
