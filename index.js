@@ -156,11 +156,12 @@ function addTask() {
 }
 
 function moveToComplete() {
+    let toDoIndex = toDo[index];
     let currentTask = this.closest('.list-group-item');
     index = Array.from(currentTask.parentNode.children).indexOf(currentTask);
     currentTasks.removeChild(currentTask);
-    completed.push(toDo[index]);
-    createTaskField(toDo[index], completeField)
+    completed.push(toDoIndex);
+    createTaskField(toDoIndex, completeField)
     toDo.splice(index, 1);
     toDoCount--
     document.getElementById('toDo-count').innerHTML = ' (' + toDoCount + ')';
@@ -174,9 +175,10 @@ function editTaskData() {
     editTaskButton.style.display = "inline";
     let currentTask = this.closest('.list-group-item');
     index = Array.from(currentTask.parentNode.children).indexOf(currentTask);
-    title.value = toDo[index].title;
-    text.value = toDo[index].text;
-    switch (toDo[index].priority) {
+    let toDoIndex = toDo[index];
+    title.value = toDoIndex.title;
+    text.value = toDoIndex.text;
+    switch (toDoIndex.priority) {
         case 'Low priority':
             document.getElementById('Low').checked = "true";
             break;
