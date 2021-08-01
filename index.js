@@ -3,7 +3,7 @@ const addTaskButton = document.getElementById('add-task');
 const editTaskButton = document.getElementById('edit-task');
 const title = document.getElementById('inputTitle');
 const text = document.getElementById('inputText');
-const taskField = document.getElementById('currentTasks');
+const currentTasks = document.getElementById('currentTasks');
 const completeField = document.getElementById('completedTasks');
 const priorityFields = document.getElementsByClassName('form-check-input');
 const newSort = document.getElementById('sort-from-new');
@@ -67,7 +67,7 @@ function createTaskField(el, area) {
     deleteButton.classList.add("btn", "btn-danger", "w-100");
     deleteButton.innerText = "Delete";
 
-    if (area === taskField) {
+    if (area === currentTasks) {
         let dropdown = document.createElement('div');
         dropdown.classList.add("dropdown", "m-2", "dropleft");
         li.appendChild(dropdown);
@@ -134,7 +134,7 @@ function createNewTask() {
 
 
 function addTask() {
-    const taskCount = taskField.getElementsByTagName("li").length
+    const taskCount = currentTasks.getElementsByTagName("li").length
     let task = {
         title: '',
         text: '',
@@ -149,7 +149,7 @@ function addTask() {
     task.time = setTaskTime();
     task.date = new Date();
     toDo.push(task);
-    createTaskField(task, taskField);
+    createTaskField(task, currentTasks);
     toDoCount++
     document.getElementById('toDo-count').innerHTML = ' (' + toDoCount + ')';
     saveData();
@@ -158,7 +158,7 @@ function addTask() {
 function moveToComplete() {
     let currentTask = this.closest('.list-group-item');
     index = Array.from(currentTask.parentNode.children).indexOf(currentTask);
-    taskField.removeChild(currentTask);
+    currentTasks.removeChild(currentTask);
     completed.push(toDo[index]);
     createTaskField(toDo[index], completeField)
     toDo.splice(index, 1);
@@ -206,10 +206,10 @@ function saveEditChanges() {
     task.priority = selectPriority() + ' priority';
     task.time = setTaskTime();
     toDo.splice(index, 1, task);
-    let newTitle = taskField.children[index].getElementsByTagName("h5")[0];
-    let newText = taskField.children[index].getElementsByTagName("p")[0];
-    let newPriority = taskField.children[index].getElementsByTagName("small")[0];
-    let newTime = taskField.children[index].getElementsByTagName("small")[1];
+    let newTitle = currentTasks.children[index].getElementsByTagName("h5")[0];
+    let newText = currentTasks.children[index].getElementsByTagName("p")[0];
+    let newPriority = currentTasks.children[index].getElementsByTagName("small")[0];
+    let newTime = currentTasks.children[index].getElementsByTagName("small")[1];
     newTitle.innerHTML = task.title;
     newText.innerHTML = task.text;
     newPriority.innerHTML = selectPriority() + ' priority';
@@ -225,7 +225,7 @@ function deleteTaskData() {
     let type = this.closest('.list-group-item').parentNode.id;
     if (type === "currentTasks") {
         toDo.splice(index, 1);
-        taskField.removeChild(currentTask);
+        currentTasks.removeChild(currentTask);
         toDoCount--
         document.getElementById('toDo-count').innerHTML = ' (' + toDoCount + ')';
     } else {
@@ -241,9 +241,9 @@ function sortFromNew() {
     toDo.sort(function(a, b) {
         return new Date(a.date) - new Date(b.date);
     });
-    taskField.innerHTML = "";
+    currentTasks.innerHTML = "";
     toDo.forEach(function(el) {
-        return createTaskField(el, taskField);
+        return createTaskField(el, currentTasks);
     })
     saveData();
 }
@@ -252,9 +252,9 @@ function sortFromOld() {
     toDo.sort(function(a, b) {
         return new Date(b.date) - new Date(a.date);
     });
-    taskField.innerHTML = "";
+    currentTasks.innerHTML = "";
     toDo.forEach(function(el) {
-        return createTaskField(el, taskField);
+        return createTaskField(el, currentTasks);
     })
     saveData();
 }
@@ -293,11 +293,11 @@ function saveData() {
 window.onload = function loadTasks() {
     if (localStorage.getItem('toDo') !== null) {
         toDo = JSON.parse(localStorage.getItem('toDo'));
-        taskField.innerHTML = "";
+        currentTasks.innerHTML = "";
         toDoCount = toDo.length;
         document.getElementById('toDo-count').innerText = ' (' + toDoCount + ')';
         toDo.forEach(function(el) {
-            createTaskField(el, taskField);
+            createTaskField(el, currentTasks);
         })
     }
     if (localStorage.getItem('completedToDo') !== null) {
