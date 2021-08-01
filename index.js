@@ -6,8 +6,8 @@ const text = document.getElementById('inputText');
 const currentTasks = document.getElementById('currentTasks');
 const completeField = document.getElementById('completedTasks');
 const priorityFields = document.getElementsByClassName('form-check-input');
-const newSort = document.getElementById('sort-from-new');
-const oldSort = document.getElementById('sort-from-old');
+const ascSortButton = document.getElementById('sort-from-new');
+const descSortButton = document.getElementById('sort-from-old');
 const save = document.getElementById('save');
 const switcher = document.getElementById('customSwitch1');
 
@@ -282,8 +282,8 @@ function changeTheme() {
 newTask.addEventListener('click', createNewTask)
 addTaskButton.addEventListener('click', addTask);
 editTaskButton.addEventListener('click', saveEditChanges);
-newSort.addEventListener('click', sortFromNew);
-oldSort.addEventListener('click', sortFromOld);
+ascSortButton.addEventListener('click', sortFromNew);
+descSortButton.addEventListener('click', sortFromOld);
 switcher.addEventListener('click', changeTheme)
 
 
