@@ -6,12 +6,12 @@ const text = document.getElementById('inputText');
 const currentTasks = document.getElementById('currentTasks');
 const completeField = document.getElementById('completedTasks');
 const priorityFields = document.getElementsByClassName('form-check-input');
-const ascSortButton = document.getElementById('sort-from-new');
-const descSortButton = document.getElementById('sort-from-old');
-const saveButton = document.getElementById('save');
-const switcher = document.getElementById('customSwitch');
+const newSort = document.getElementById('sort-from-new');
+const oldSort = document.getElementById('sort-from-old');
+const save = document.getElementById('save');
+const switcher = document.getElementById('customSwitch1');
 
-let toDo = [];
+let taskList = [];
 let completed = [];
 let index;
 let toDoCount = 0;
@@ -148,7 +148,7 @@ function addTask() {
     task.priority = selectPriority() + ' priority';
     task.time = setTaskTime();
     task.date = new Date();
-    toDo.push(task);
+    taskList.push(task);
     createTaskField(task, currentTasks);
     toDoCount++
     document.getElementById('toDo-count').innerHTML = ' (' + toDoCount + ')';
@@ -156,13 +156,12 @@ function addTask() {
 }
 
 function moveToComplete() {
-    let toDoIndex = toDo[index];
     let currentTask = this.closest('.list-group-item');
     index = Array.from(currentTask.parentNode.children).indexOf(currentTask);
     currentTasks.removeChild(currentTask);
-    completed.push(toDoIndex);
-    createTaskField(toDoIndex, completeField)
-    toDo.splice(index, 1);
+    completed.push(taskList[index]);
+    createTaskField(taskList[index], completeField)
+    taskList.splice(index, 1);
     toDoCount--
     document.getElementById('toDo-count').innerHTML = ' (' + toDoCount + ')';
     completedToDoCount++
@@ -175,7 +174,7 @@ function editTaskData() {
     editTaskButton.style.display = "inline";
     let currentTask = this.closest('.list-group-item');
     index = Array.from(currentTask.parentNode.children).indexOf(currentTask);
-    let toDoIndex = toDo[index];
+    let toDoIndex = taskList[index];
     title.value = toDoIndex.title;
     text.value = toDoIndex.text;
     switch (toDoIndex.priority) {
@@ -207,7 +206,7 @@ function saveEditChanges() {
     task.text = text.value;
     task.priority = selectPriority() + ' priority';
     task.time = setTaskTime();
-    toDo.splice(index, 1, task);
+    taskList.splice(index, 1, task);
     let newElement = currentTasks.children[index];
     let newTitle = newElement.getElementsByTagName("h5")[0];
     let newText = newElement.getElementsByTagName("p")[0];
@@ -227,7 +226,7 @@ function deleteTaskData() {
     index = Array.from(currentTask.parentNode.children).indexOf(currentTask);
     let type = this.closest('.list-group-item').parentNode.id;
     if (type === "currentTasks") {
-        toDo.splice(index, 1);
+        taskList.splice(index, 1);
         currentTasks.removeChild(currentTask);
         toDoCount--
         document.getElementById('toDo-count').innerHTML = ' (' + toDoCount + ')';
@@ -241,22 +240,22 @@ function deleteTaskData() {
 }
 
 function sortFromNew() {
-    toDo.sort(function(a, b) {
+    taskList.sort(function(a, b) {
         return new Date(a.date) - new Date(b.date);
     });
     currentTasks.innerHTML = "";
-    toDo.forEach(function(el) {
+    taskList.forEach(function(el) {
         return createTaskField(el, currentTasks);
     })
     saveData();
 }
 
 function sortFromOld() {
-    toDo.sort(function(a, b) {
+    taskList.sort(function(a, b) {
         return new Date(b.date) - new Date(a.date);
     });
     currentTasks.innerHTML = "";
-    toDo.forEach(function(el) {
+    taskList.forEach(function(el) {
         return createTaskField(el, currentTasks);
     })
     saveData();
@@ -282,13 +281,13 @@ function changeTheme() {
 newTask.addEventListener('click', createNewTask)
 addTaskButton.addEventListener('click', addTask);
 editTaskButton.addEventListener('click', saveEditChanges);
-ascSortButton.addEventListener('click', sortFromNew);
-descSortButton.addEventListener('click', sortFromOld);
+newSort.addEventListener('click', sortFromNew);
+oldSort.addEventListener('click', sortFromOld);
 switcher.addEventListener('click', changeTheme)
 
 
 function saveData() {
-    localStorage.setItem('toDo', JSON.stringify(toDo));
+    localStorage.setItem('toDo', JSON.stringify(taskList));
     localStorage.setItem('completedToDo', JSON.stringify(completed));
 }
 
@@ -296,11 +295,11 @@ function saveData() {
 window.onload = function loadTasks() {
     let task = localStorage.getItem('toDo');
     if (task !== null) {
-        toDo = JSON.parse(localStorage.getItem('toDo'));
+        taskList = JSON.parse(localStorage.getItem('toDo'));
         currentTasks.innerHTML = "";
-        toDoCount = toDo.length;
+        toDoCount = taskList.length;
         document.getElementById('toDo-count').innerText = ' (' + `${toDoCount}` + ')';
-        toDo.forEach(function(el) {
+        taskList.forEach(function(el) {
             createTaskField(el, currentTasks);
         })
     }
