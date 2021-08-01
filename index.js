@@ -128,8 +128,8 @@ function colorTask(li, priority) {
 }
 
 function createNewTask() {
-    editTaskButton.style.display = "none";
-    addTaskButton.style.display = "inline";
+    editTaskButton.classList.add('hide');
+    addTaskButton.classList.add('show');
 }
 
 

@@ -2,3 +2,11 @@
     min-height: calc(100vh - 15px);
     margin: 15px auto 0;
 }
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: inline;
+}
