@@ -9,7 +9,7 @@ const priorityFields = document.getElementsByClassName('form-check-input');
 const ascSortButton = document.getElementById('sort-from-new');
 const descSortButton = document.getElementById('sort-from-old');
 const saveButton = document.getElementById('save');
-const switcher = document.getElementById('customSwitch1');
+const switcher = document.getElementById('customSwitch');
 
 let toDo = [];
 let completed = [];
